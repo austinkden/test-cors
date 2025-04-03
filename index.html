@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets Add Row</title>
+</head>
+<body>
+    <button onclick="addRow()">Add Row</button>
+    <p id="status"></p>
+
+    <script>
+        function addRow() {
+            const url = "https://script.google.com/macros/s/AKfycbzQA5-z2HJ3rpe0LMH-1odee055zmkGKzD6JYHQMyRPnHo2i3ogiZyMCbgiPs8MKVCX/exec"; // Replace with your actual Apps Script URL
+
+            fetch(url, { method: "POST" })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("status").innerText = "Row Added: " + data;
+                })
+                .catch(error => {
+                    document.getElementById("status").innerText = "Error: " + error;
+                });
+        }
+    </script>
+</body>
+</html>
