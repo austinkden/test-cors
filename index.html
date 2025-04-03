@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sheets Add Row</title>
+  <meta charset="UTF-8">
+  <title>Add Row to Google Sheet</title>
 </head>
 <body>
-    <button onclick="addRow()">Add Row</button>
-    <p id="status"></p>
+  <button onclick="addRow()">Add Custom Row</button>
+  <p id="status"></p>
 
-    <script>
-        function addRow() {
-            const url = "https://script.google.com/macros/s/AKfycbzQA5-z2HJ3rpe0LMH-1odee055zmkGKzD6JYHQMyRPnHo2i3ogiZyMCbgiPs8MKVCX/exec"; // Replace with your actual Apps Script URL
+  <script>
+    function addRow() {
+      // you can later get these from <input> elements
+      const value1 = "Hello";
+      const value2 = "World";
 
-            fetch(url, { method: "POST" })
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("status").innerText = "Row Added: " + data;
-                })
-                .catch(error => {
-                    document.getElementById("status").innerText = "Error: " + error;
-                });
-        }
-    </script>
+      const url = "https://script.google.com/macros/s/AKfycbzSotSOXcey5LS1su4VqSDHlMwfIglRfoCdvJiLGFO9MxWY1bNJUiHUCam_vGC8L5zr/exec"; // change this!
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ value1, value2 }),
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("status").innerText = "Response: " + data;
+      })
+      .catch(error => {
+        document.getElementById("status").innerText = "Error: " + error;
+      });
+    }
+  </script>
 </body>
 </html>
